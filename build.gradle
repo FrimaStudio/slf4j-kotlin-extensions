@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
+    }
+}
+
+plugins {
+    id 'net.researchgate.release' version '2.6.0'
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'org.jetbrains.dokka'
+
+sourceCompatibility = 1.6
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compileOnly 'org.slf4j:slf4j-api:1.7.+'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.nhaarman:mockito-kotlin:1.4.0'
+    testCompile 'org.slf4j:slf4j-simple:1.7.+'
+}
+
+compileKotlin {
+    // Make sure this is usable on Android by forcing to use Java 1.6 bytecode
+    kotlinOptions.jvmTarget = "1.6"
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from dokka
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+dokka {
+    // This looks absolutely horrible, but apparently it's as good as it gets for Kotlin doc ATM...
+    outputFormat = 'javadoc'
+}
