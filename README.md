@@ -2,6 +2,9 @@
 
 Utilities to make working with [slf4j](https://www.slf4j.org/) `Logger`s from [Kotlin](https://kotlinlang.org/) more enjoyable.
 
+[![Build Status](https://travis-ci.org/FrimaStudio/slf4j-kotlin-extensions.svg?branch=master)](https://travis-ci.org/FrimaStudio/slf4j-kotlin-extensions)
+
+
 ## Lazy loggers
 Contains 3 `lazyLogger` utilities to get `Lazy<org.slf4j.Logger>` instances:
 ```kotlin
