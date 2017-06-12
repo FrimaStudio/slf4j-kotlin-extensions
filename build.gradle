@@ -15,6 +15,8 @@ plugins {
 
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.6
 
@@ -47,7 +49,64 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+    required = { gradle.taskGraph.hasTask("uploadArchives") }
+}
+
 dokka {
     // This looks absolutely horrible, but apparently it's as good as it gets for Kotlin doc ATM...
     outputFormat = 'javadoc'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'slf4j-kotlin-extensions'
+                packaging 'jar'
+                description 'Utilities to make working with slf4j Loggers from Kotlin more enjoyable.'
+                url 'https://github.com/FrimaStudio/slf4j-kotlin-extensions'
+
+                scm {
+                    connection 'scm:git:https://github.com/FrimaStudio/slf4j-kotlin-extensions'
+                    developerConnection 'scm:git:git@github.com:FrimaStudio/slf4j-kotlin-extensions.git'
+                    url 'https://github.com/FrimaStudio/slf4j-kotlin-extensions'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'fdeschenes'
+                        name 'Frederick Deschenes'
+                        email 'frederick.deschenes@frimastudio.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+release {
+    buildTasks += ['uploadArchives']
 }
