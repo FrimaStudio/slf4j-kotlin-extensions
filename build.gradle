@@ -26,12 +26,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.slf4j:slf4j-api:1.7.+'
+    compileOnly 'org.slf4j:slf4j-api:1.7.25'
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     testCompile 'junit:junit:4.12'
     testCompile 'com.nhaarman:mockito-kotlin:1.4.0'
-    testCompile 'org.slf4j:slf4j-simple:1.7.+'
+    testCompile 'org.slf4j:slf4j-simple:1.7.25'
 }
 
 compileKotlin {
