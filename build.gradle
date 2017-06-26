@@ -5,7 +5,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
     }
 }
 
@@ -59,8 +59,19 @@ signing {
 }
 
 dokka {
-    // This looks absolutely horrible, but apparently it's as good as it gets for Kotlin doc ATM...
-    outputFormat = 'javadoc'
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
+    processConfigurations = ["compile", "compileOnly"]
+
+    externalDocumentationLink {
+        url = new URL("https://www.slf4j.org/api/")
+    }
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/FrimaStudio/slf4j-kotlin-extensions/tree/master/src/main/kotlin"
+        suffix = "#L"
+    }
 }
 
 uploadArchives {
