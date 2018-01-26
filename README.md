@@ -39,8 +39,8 @@ class TheClass {
         try {
             // Do something risky here
         } catch (e: Throwable) {
-            logger.errorThrowable {
-                "You can also use the (String, Throwable) overloads :: $param" to e
+            logger.error(e) {
+                "You can also use the (String, Throwable) overloads :: $param"
             }
         }
     }

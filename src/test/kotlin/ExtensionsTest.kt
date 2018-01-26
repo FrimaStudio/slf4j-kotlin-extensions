@@ -20,9 +20,9 @@ import org.slf4j.*
 import java.util.*
 
 class ExtensionsTest {
-    val logger: Logger = mock()
-    val marker: Marker = mock()
-    val throwable: Throwable = mock()
+    private val logger: Logger = mock()
+    private val marker: Marker = mock()
+    private val throwable: Throwable = mock()
 
     @Test
     fun trace_enabled() {
@@ -80,8 +80,8 @@ class ExtensionsTest {
     fun traceThrowable_enabled() {
         given(logger.isTraceEnabled).willReturn(true)
 
-        logger.traceThrowable {
-            TEST_STR to throwable
+        logger.trace(throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -94,8 +94,8 @@ class ExtensionsTest {
     fun traceThrowable_disabled() {
         given(logger.isTraceEnabled).willReturn(false)
 
-        logger.traceThrowable {
-            TEST_STR to throwable
+        logger.trace(throwable) {
+            TEST_STR
         }
 
         then(logger).should().isTraceEnabled
@@ -106,8 +106,8 @@ class ExtensionsTest {
     fun traceThrowable_marker_enabled() {
         given(logger.isTraceEnabled(marker)).willReturn(true)
 
-        logger.traceThrowable(marker) {
-            TEST_STR to throwable
+        logger.trace(marker, throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -120,8 +120,8 @@ class ExtensionsTest {
     fun traceThrowable_marker_disabled() {
         given(logger.isTraceEnabled(marker)).willReturn(false)
 
-        logger.traceThrowable(marker) {
-            TEST_STR to throwable
+        logger.trace(marker, throwable) {
+            TEST_STR
         }
 
         then(logger).should().isTraceEnabled(marker)
@@ -184,8 +184,8 @@ class ExtensionsTest {
     fun debugThrowable_enabled() {
         given(logger.isDebugEnabled).willReturn(true)
 
-        logger.debugThrowable {
-            TEST_STR to throwable
+        logger.debug(throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -198,8 +198,8 @@ class ExtensionsTest {
     fun debugThrowable_disabled() {
         given(logger.isDebugEnabled).willReturn(false)
 
-        logger.debugThrowable {
-            TEST_STR to throwable
+        logger.debug(throwable) {
+            TEST_STR
         }
 
         then(logger).should().isDebugEnabled
@@ -210,8 +210,8 @@ class ExtensionsTest {
     fun debugThrowable_marker_enabled() {
         given(logger.isDebugEnabled(marker)).willReturn(true)
 
-        logger.debugThrowable(marker) {
-            TEST_STR to throwable
+        logger.debug(marker, throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -224,8 +224,8 @@ class ExtensionsTest {
     fun debugThrowable_marker_disabled() {
         given(logger.isDebugEnabled(marker)).willReturn(false)
 
-        logger.debugThrowable(marker) {
-            TEST_STR to throwable
+        logger.debug(marker, throwable) {
+            TEST_STR
         }
 
         then(logger).should().isDebugEnabled(marker)
@@ -288,8 +288,8 @@ class ExtensionsTest {
     fun infoThrowable_enabled() {
         given(logger.isInfoEnabled).willReturn(true)
 
-        logger.infoThrowable {
-            TEST_STR to throwable
+        logger.info(throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -302,8 +302,8 @@ class ExtensionsTest {
     fun infoThrowable_disabled() {
         given(logger.isInfoEnabled).willReturn(false)
 
-        logger.infoThrowable {
-            TEST_STR to throwable
+        logger.info(throwable) {
+            TEST_STR
         }
 
         then(logger).should().isInfoEnabled
@@ -314,8 +314,8 @@ class ExtensionsTest {
     fun infoThrowable_marker_enabled() {
         given(logger.isInfoEnabled(marker)).willReturn(true)
 
-        logger.infoThrowable(marker) {
-            TEST_STR to throwable
+        logger.info(marker, throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -328,8 +328,8 @@ class ExtensionsTest {
     fun infoThrowable_marker_disabled() {
         given(logger.isInfoEnabled(marker)).willReturn(false)
 
-        logger.infoThrowable(marker) {
-            TEST_STR to throwable
+        logger.info(marker, throwable) {
+            TEST_STR
         }
 
         then(logger).should().isInfoEnabled(marker)
@@ -392,8 +392,8 @@ class ExtensionsTest {
     fun warnThrowable_enabled() {
         given(logger.isWarnEnabled).willReturn(true)
 
-        logger.warnThrowable {
-            TEST_STR to throwable
+        logger.warn(throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -406,8 +406,8 @@ class ExtensionsTest {
     fun warnThrowable_disabled() {
         given(logger.isWarnEnabled).willReturn(false)
 
-        logger.warnThrowable {
-            TEST_STR to throwable
+        logger.warn(throwable) {
+            TEST_STR
         }
 
         then(logger).should().isWarnEnabled
@@ -418,8 +418,8 @@ class ExtensionsTest {
     fun warnThrowable_marker_enabled() {
         given(logger.isWarnEnabled(marker)).willReturn(true)
 
-        logger.warnThrowable(marker) {
-            TEST_STR to throwable
+        logger.warn(marker, throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -432,8 +432,8 @@ class ExtensionsTest {
     fun warnThrowable_marker_disabled() {
         given(logger.isWarnEnabled(marker)).willReturn(false)
 
-        logger.warnThrowable(marker) {
-            TEST_STR to throwable
+        logger.warn(marker, throwable) {
+            TEST_STR
         }
 
         then(logger).should().isWarnEnabled(marker)
@@ -496,8 +496,8 @@ class ExtensionsTest {
     fun errorThrowable_enabled() {
         given(logger.isErrorEnabled).willReturn(true)
 
-        logger.errorThrowable {
-            TEST_STR to throwable
+        logger.error(throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -510,8 +510,8 @@ class ExtensionsTest {
     fun errorThrowable_disabled() {
         given(logger.isErrorEnabled).willReturn(false)
 
-        logger.errorThrowable {
-            TEST_STR to throwable
+        logger.error(throwable) {
+            TEST_STR
         }
 
         then(logger).should().isErrorEnabled
@@ -522,8 +522,8 @@ class ExtensionsTest {
     fun errorThrowable_marker_enabled() {
         given(logger.isErrorEnabled(marker)).willReturn(true)
 
-        logger.errorThrowable(marker) {
-            TEST_STR to throwable
+        logger.error(marker, throwable) {
+            TEST_STR
         }
 
         val order = inOrder(logger)
@@ -536,8 +536,8 @@ class ExtensionsTest {
     fun errorThrowable_marker_disabled() {
         given(logger.isErrorEnabled(marker)).willReturn(false)
 
-        logger.errorThrowable(marker) {
-            TEST_STR to throwable
+        logger.error(marker, throwable) {
+            TEST_STR
         }
 
         then(logger).should().isErrorEnabled(marker)

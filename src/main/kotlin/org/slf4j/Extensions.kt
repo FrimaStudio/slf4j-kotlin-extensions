@@ -45,13 +45,13 @@ inline fun Logger.trace(marker: Marker, crossinline block: (Marker) -> String) {
  * Log an exception (throwable) at the TRACE level with an
  * accompanying message.
  *
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message and exception to log.
  * Will not be called unless [Logger.isTraceEnabled] returns true.
  */
-inline fun Logger.traceThrowable(crossinline block: () -> Pair<String, Throwable>) {
+inline fun Logger.trace(throwable: Throwable, crossinline block: () -> String) {
     if (isTraceEnabled) {
-        val (msg, throwable) = block()
-        trace(msg, throwable)
+        trace(block(), throwable)
     }
 }
 
@@ -60,13 +60,13 @@ inline fun Logger.traceThrowable(crossinline block: () -> Pair<String, Throwable
  * accompanying message and with the specified [Marker]
  *
  * @param marker the marker data specific to this log statement
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message to log.
  * Will not be called unless [Logger.isTraceEnabled] returns true.
  */
-inline fun Logger.traceThrowable(marker: Marker, crossinline block: (Marker) -> Pair<String, Throwable>) {
+inline fun Logger.trace(marker: Marker, throwable: Throwable, crossinline block: (Marker) -> String) {
     if (isTraceEnabled(marker)) {
-        val (msg, throwable) = block(marker)
-        trace(marker, msg, throwable)
+        trace(marker, block(marker), throwable)
     }
 }
 
@@ -99,13 +99,13 @@ inline fun Logger.debug(marker: Marker, crossinline block: (Marker) -> String) {
  * Log an exception (throwable) at the DEBUG level with an
  * accompanying message.
  *
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message and exception to log.
  * Will not be called unless [Logger.isDebugEnabled] returns true.
  */
-inline fun Logger.debugThrowable(crossinline block: () -> Pair<String, Throwable>) {
+inline fun Logger.debug(throwable: Throwable, crossinline block: () -> String) {
     if (isDebugEnabled) {
-        val (msg, throwable) = block()
-        debug(msg, throwable)
+        debug(block(), throwable)
     }
 }
 
@@ -114,13 +114,13 @@ inline fun Logger.debugThrowable(crossinline block: () -> Pair<String, Throwable
  * accompanying message and with the specified [Marker]
  *
  * @param marker the marker data specific to this log statement
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message to log.
  * Will not be called unless [Logger.isDebugEnabled] returns true.
  */
-inline fun Logger.debugThrowable(marker: Marker, crossinline block: (Marker) -> Pair<String, Throwable>) {
+inline fun Logger.debug(marker: Marker, throwable: Throwable, crossinline block: (Marker) -> String) {
     if (isDebugEnabled(marker)) {
-        val (msg, throwable) = block(marker)
-        debug(marker, msg, throwable)
+        debug(marker, block(marker), throwable)
     }
 }
 
@@ -153,13 +153,13 @@ inline fun Logger.info(marker: Marker, crossinline block: (Marker) -> String) {
  * Log an exception (throwable) at the INFO level with an
  * accompanying message.
  *
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message and exception to log.
  * Will not be called unless [Logger.isInfoEnabled] returns true.
  */
-inline fun Logger.infoThrowable(crossinline block: () -> Pair<String, Throwable>) {
+inline fun Logger.info(throwable: Throwable, crossinline block: () -> String) {
     if (isInfoEnabled) {
-        val (msg, throwable) = block()
-        info(msg, throwable)
+        info(block(), throwable)
     }
 }
 
@@ -168,13 +168,13 @@ inline fun Logger.infoThrowable(crossinline block: () -> Pair<String, Throwable>
  * accompanying message and with the specified [Marker]
  *
  * @param marker the marker data specific to this log statement
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message to log.
  * Will not be called unless [Logger.isInfoEnabled] returns true.
  */
-inline fun Logger.infoThrowable(marker: Marker, crossinline block: (Marker) -> Pair<String, Throwable>) {
+inline fun Logger.info(marker: Marker, throwable: Throwable, crossinline block: (Marker) -> String) {
     if (isInfoEnabled(marker)) {
-        val (msg, throwable) = block(marker)
-        info(marker, msg, throwable)
+        info(marker, block(marker), throwable)
     }
 }
 
@@ -207,13 +207,13 @@ inline fun Logger.warn(marker: Marker, crossinline block: (Marker) -> String) {
  * Log an exception (throwable) at the WARN level with an
  * accompanying message.
  *
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message and exception to log.
  * Will not be called unless [Logger.isWarnEnabled] returns true.
  */
-inline fun Logger.warnThrowable(crossinline block: () -> Pair<String, Throwable>) {
+inline fun Logger.warn(throwable: Throwable, crossinline block: () -> String) {
     if (isWarnEnabled) {
-        val (msg, throwable) = block()
-        warn(msg, throwable)
+        warn(block(), throwable)
     }
 }
 
@@ -222,13 +222,13 @@ inline fun Logger.warnThrowable(crossinline block: () -> Pair<String, Throwable>
  * accompanying message and with the specified [Marker]
  *
  * @param marker the marker data specific to this log statement
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message to log.
  * Will not be called unless [Logger.isWarnEnabled] returns true.
  */
-inline fun Logger.warnThrowable(marker: Marker, crossinline block: (Marker) -> Pair<String, Throwable>) {
+inline fun Logger.warn(marker: Marker, throwable: Throwable, crossinline block: (Marker) -> String) {
     if (isWarnEnabled(marker)) {
-        val (msg, throwable) = block(marker)
-        warn(marker, msg, throwable)
+        warn(marker, block(marker), throwable)
     }
 }
 
@@ -261,13 +261,13 @@ inline fun Logger.error(marker: Marker, crossinline block: (Marker) -> String) {
  * Log an exception (throwable) at the ERROR level with an
  * accompanying message.
  *
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message and exception to log.
  * Will not be called unless [Logger.isErrorEnabled] returns true.
  */
-inline fun Logger.errorThrowable(crossinline block: () -> Pair<String, Throwable>) {
+inline fun Logger.error(throwable: Throwable, crossinline block: () -> String) {
     if (isErrorEnabled) {
-        val (msg, throwable) = block()
-        error(msg, throwable)
+        error(block(), throwable)
     }
 }
 
@@ -276,12 +276,12 @@ inline fun Logger.errorThrowable(crossinline block: () -> Pair<String, Throwable
  * accompanying message and with the specified [Marker]
  *
  * @param marker the marker data specific to this log statement
+ * @param throwable the exception (throwable) to log
  * @param block lazy-evaluated function that returns the message to log.
  * Will not be called unless [Logger.isErrorEnabled] returns true.
  */
-inline fun Logger.errorThrowable(marker: Marker, crossinline block: (Marker) -> Pair<String, Throwable>) {
+inline fun Logger.error(marker: Marker, throwable: Throwable, crossinline block: (Marker) -> String) {
     if (isErrorEnabled(marker)) {
-        val (msg, throwable) = block(marker)
-        error(marker, msg, throwable)
+        error(marker, block(marker), throwable)
     }
 }
