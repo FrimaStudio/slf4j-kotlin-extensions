@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.junit.Assert.*
-import org.junit.Test
-import org.slf4j.KLogger
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
 import org.slf4j.lazyLogger
 import java.util.*
 
@@ -25,9 +25,7 @@ class LazyLoggerTest {
     fun withKClass() {
         val logger = lazyLogger(LazyLoggerTest::class)
 
-        assertTrue(logger is Lazy<KLogger>)
         assertNotNull(logger.value)
-        assertTrue(logger.value is KLogger)
         assertEquals(LazyLoggerTest::class.simpleName, logger.value.name)
     }
 
@@ -35,9 +33,7 @@ class LazyLoggerTest {
     fun withJavaClass() {
         val logger = lazyLogger(LazyLoggerTest::class.java)
 
-        assertTrue(logger is Lazy<KLogger>)
         assertNotNull(logger.value)
-        assertTrue(logger.value is KLogger)
         assertEquals(LazyLoggerTest::class.simpleName, logger.value.name)
     }
 
@@ -46,9 +42,7 @@ class LazyLoggerTest {
         val name = UUID.randomUUID().toString()
         val logger = lazyLogger(name)
 
-        assertTrue(logger is Lazy<KLogger>)
         assertNotNull(logger.value)
-        assertTrue(logger.value is KLogger)
         assertEquals(name, logger.value.name)
     }
 }

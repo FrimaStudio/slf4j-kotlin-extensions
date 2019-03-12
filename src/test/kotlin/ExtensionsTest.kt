@@ -15,7 +15,7 @@
  */
 
 import com.nhaarman.mockito_kotlin.*
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.slf4j.*
 import java.util.*
 

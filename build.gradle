@@ -20,13 +20,18 @@ dependencies {
 
     testCompile "org.jetbrains.kotlin:kotlin-reflect"
 
-    testCompile 'junit:junit:4.12'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
 
     testCompile ('com.nhaarman:mockito-kotlin:1.4.0') {
         exclude group: 'org.jetbrains.kotlin'
     }
 
     testCompile 'org.slf4j:slf4j-simple:1.7.25'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 compileKotlin {
