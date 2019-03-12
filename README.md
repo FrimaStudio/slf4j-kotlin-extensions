@@ -49,7 +49,7 @@ class TheClass {
 All log functions support the same features (markers, throwables) even if not specifically demonstrated in the above example.
 
 ## Adding to your project
-Although not specified as a depencency, you will need an SLF4J implementation and the Kotlin stdlib on your classpath.
+Although not specified as a dependency, you will need an SLF4J implementation and the Kotlin stdlib on your classpath.
 
 ### Gradle
 ```gradle
