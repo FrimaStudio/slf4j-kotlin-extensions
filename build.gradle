@@ -23,9 +23,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
 
-    testCompile ('com.nhaarman:mockito-kotlin:1.4.0') {
-        exclude group: 'org.jetbrains.kotlin'
-    }
+    testCompile "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 
     testCompile "org.slf4j:slf4j-simple:$slf4j_version"
 }

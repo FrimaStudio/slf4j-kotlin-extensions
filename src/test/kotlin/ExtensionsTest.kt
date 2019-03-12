@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import org.junit.jupiter.api.Test
 import org.slf4j.*
 import java.util.*
